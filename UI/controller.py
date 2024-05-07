@@ -9,4 +9,17 @@ class Controller:
         self._model = model
 
     def handleAnalizza(self,e):
-        pass
+        self._model.crea_grafico(self._view._txtIn.value)
+
+        self._view._txt_result.clean()
+
+        self._view._txt_result.controls.append(ft.Text(f"Numero nodi: {len(self._model.grafo.nodes)}"))
+        self._view._txt_result.controls.append(ft.Text(f"Numero archi: {len(self._model.grafo.edges)}"))
+
+        for i in self._model.grafo.edges:
+            dist=self._model.grafo.edges[i]["distanza"]
+
+            self._view._txt_result.controls.append(ft.Text(f"La distanza tra {i[0]} e {i[1]} è {dist}"))
+
+        self._view.update_page()
+
